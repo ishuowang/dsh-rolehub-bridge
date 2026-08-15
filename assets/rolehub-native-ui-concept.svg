@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">RoleHub native UI concept preview</title>
+  <desc id="desc">Synthetic DSH-style RoleHub modal showing Hub filters, role search, capabilities, a locked bundle digest, and optional Room attachment.</desc>
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#f8fafc"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4d6bfe"/>
+      <stop offset="1" stop-color="#8066ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#27345f" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="url(#page)"/>
+  <rect x="34" y="34" width="1372" height="832" rx="24" fill="#fff" stroke="#dde2ee"/>
+  <rect x="34" y="34" width="224" height="832" rx="24" fill="#f7f8fb"/>
+  <rect x="34" y="112" width="224" height="1" fill="#e5e8f0"/>
+  <circle cx="72" cy="74" r="18" fill="url(#brand)"/>
+  <path d="M63 75c8-10 17-10 23 0-8 8-17 8-23 0Z" fill="#fff" opacity=".94"/>
+  <text x="102" y="81" fill="#171a24" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700">DSH</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="14" fill="#626a7b">
+    <rect x="52" y="140" width="188" height="42" rx="11" fill="#eceffd"/>
+    <text x="72" y="166" fill="#3347a8" font-weight="600">Current Session</text>
+    <text x="72" y="220">Workspace</text>
+    <text x="72" y="263">Subagents</text>
+  </g>
+  <rect x="52" y="790" width="188" height="44" rx="12" fill="#fff" stroke="#dfe3ed"/>
+  <circle cx="75" cy="812" r="10" fill="#4d6bfe" opacity=".16"/>
+  <path d="M70 812h10M75 807v10" stroke="#4d6bfe" stroke-width="2" stroke-linecap="round"/>
+  <text x="96" y="817" fill="#262b37" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600">RoleHub</text>
+
+  <g filter="url(#shadow)">
+    <rect x="294" y="82" width="1072" height="738" rx="20" fill="#fff" stroke="#dfe3ed"/>
+  </g>
+  <text x="330" y="127" fill="#171a24" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="750">RoleHub</text>
+  <text x="330" y="153" fill="#697184" font-family="Inter,Arial,sans-serif" font-size="13">Discover a role, inspect requested access, then create a separate verified Session.</text>
+  <rect x="294" y="178" width="1072" height="1" fill="#e8eaf0"/>
+
+  <rect x="324" y="208" width="340" height="580" rx="15" fill="#fbfbfc" stroke="#e1e4eb"/>
+  <rect x="344" y="228" width="300" height="42" rx="11" fill="#fff" stroke="#dfe3ea"/>
+  <circle cx="365" cy="249" r="7" fill="none" stroke="#7b8498" stroke-width="2"/>
+  <path d="m370 254 6 6" stroke="#7b8498" stroke-width="2" stroke-linecap="round"/>
+  <text x="388" y="254" fill="#9097a6" font-family="Inter,Arial,sans-serif" font-size="13">Search roles, tags, capabilities…</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="11" font-weight="600">
+    <rect x="344" y="286" width="62" height="26" rx="13" fill="#e9edff" stroke="#4d6bfe"/>
+    <text x="357" y="303" fill="#3d54cb">All Hubs</text>
+    <rect x="414" y="286" width="68" height="26" rx="13" fill="#fff" stroke="#dfe3ea"/>
+    <text x="429" y="303" fill="#616a7d">official</text>
+    <rect x="490" y="286" width="82" height="26" rx="13" fill="#fff" stroke="#dfe3ea"/>
+    <text x="504" y="303" fill="#616a7d">community</text>
+    <rect x="344" y="322" width="62" height="24" rx="12" fill="#fff" stroke="#dfe3ea"/>
+    <text x="356" y="338" fill="#616a7d">All tags</text>
+    <rect x="414" y="322" width="63" height="24" rx="12" fill="#fff" stroke="#dfe3ea"/>
+    <text x="427" y="338" fill="#616a7d">#review</text>
+    <rect x="485" y="322" width="60" height="24" rx="12" fill="#fff" stroke="#dfe3ea"/>
+    <text x="498" y="338" fill="#616a7d">#safety</text>
+  </g>
+
+  <rect x="338" y="364" width="312" height="78" rx="12" fill="#eef1ff" stroke="#4d6bfe"/>
+  <text x="356" y="391" fill="#1d2433" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700">Careful Reviewer</text>
+  <circle cx="626" cy="386" r="9" fill="#dcf6e7"/>
+  <path d="m621 386 3 3 6-7" fill="none" stroke="#198754" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="356" y="417" fill="#6e7789" font-family="Inter,Arial,sans-serif" font-size="11">official · v1.2.3 · reference</text>
+  <rect x="338" y="452" width="312" height="78" rx="12" fill="#fff" stroke="#e5e7ed"/>
+  <text x="356" y="480" fill="#1d2433" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650">Research Librarian</text>
+  <text x="356" y="506" fill="#6e7789" font-family="Inter,Arial,sans-serif" font-size="11">community · v0.8.0 · community</text>
+  <rect x="338" y="540" width="312" height="78" rx="12" fill="#fff" stroke="#e5e7ed"/>
+  <text x="356" y="568" fill="#1d2433" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650">Release Coordinator</text>
+  <text x="356" y="594" fill="#6e7789" font-family="Inter,Arial,sans-serif" font-size="11">official · v1.0.1 · reference</text>
+
+  <rect x="684" y="208" width="652" height="580" rx="15" fill="#fff" stroke="#e1e4eb"/>
+  <text x="712" y="239" fill="#4d6bfe" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="800" letter-spacing="1">OFFICIAL / IO.EXAMPLE</text>
+  <text x="712" y="273" fill="#171a24" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="750">Careful Reviewer</text>
+  <text x="712" y="300" fill="#697184" font-family="Inter,Arial,sans-serif" font-size="13">Reviews a bounded change and reports evidence without broadening authority.</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="11">
+    <rect x="712" y="317" width="58" height="23" rx="11" fill="#f0f2f7"/><text x="725" y="332" fill="#596174">#review</text>
+    <rect x="778" y="317" width="55" height="23" rx="11" fill="#f0f2f7"/><text x="792" y="332" fill="#596174">#safety</text>
+  </g>
+  <rect x="712" y="356" width="596" height="42" rx="10" fill="#f7f8fb"/>
+  <circle cx="733" cy="377" r="9" fill="#dcf6e7"/>
+  <path d="m728 377 3 3 6-7" fill="none" stroke="#198754" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="752" y="381" fill="#596174" font-family="ui-monospace,SFMono-Regular,monospace" font-size="11">Bundle locked · sha256:b6c92f10a4…a08dd971</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="712" y="430" fill="#4d6bfe" font-size="10" font-weight="800">REQUIRED · 1</text>
+    <rect x="712" y="441" width="108" height="25" rx="12" fill="#eef1ff"/><text x="726" y="458" fill="#3347a8" font-size="11">filesystem.read</text>
+    <text x="712" y="493" fill="#737b8c" font-size="10" font-weight="800">OPTIONAL · 1</text>
+    <rect x="712" y="504" width="99" height="25" rx="12" fill="#f0f2f7"/><text x="727" y="521" fill="#596174" font-size="11">room.message</text>
+    <text x="712" y="556" fill="#c03d48" font-size="10" font-weight="800">DENIED · 1</text>
+    <rect x="712" y="567" width="86" height="25" rx="12" fill="#fff0f1"/><text x="727" y="584" fill="#a92d39" font-size="11">secrets.use</text>
+  </g>
+  <rect x="712" y="615" width="596" height="1" fill="#e7e9ef"/>
+  <text x="712" y="644" fill="#252a36" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700">Create a role-scoped Session</text>
+  <rect x="712" y="660" width="288" height="38" rx="10" fill="#fff" stroke="#dfe3ea"/>
+  <text x="727" y="684" fill="#8b93a3" font-family="Inter,Arial,sans-serif" font-size="12">Careful Reviewer</text>
+  <rect x="1012" y="660" width="296" height="38" rx="10" fill="#fff" stroke="#dfe3ea"/>
+  <text x="1027" y="684" fill="#596174" font-family="Inter,Arial,sans-serif" font-size="12">Review Room (optional)</text>
+  <rect x="712" y="714" width="596" height="46" rx="11" fill="url(#brand)"/>
+  <text x="1010" y="742" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" text-anchor="middle">Start and attach to Room</text>
+
+  <rect x="1112" y="51" width="254" height="25" rx="12" fill="#202737" opacity=".9"/>
+  <text x="1239" y="68" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="650" text-anchor="middle" letter-spacing=".4">CONCEPT PREVIEW · SYNTHETIC DATA</text>
+</svg>

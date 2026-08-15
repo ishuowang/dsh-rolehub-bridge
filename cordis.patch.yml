@@ -1,0 +1,11 @@
+# RoleHub Bridge is split into a Host runtime, an Agent-scoped slash command,
+# and the narrow same-origin transport used by its additive native Web UI.
+- insert:
+    - id: rolehub-bridge
+      name: 'dsh-rolehub-bridge'
+
+    - id: rolehub-bridge-commands
+      name: 'dsh-rolehub-bridge/commands'
+
+    - id: rolehub-bridge-native-api
+      name: 'dsh-rolehub-bridge/native-api'
