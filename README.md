@@ -62,7 +62,7 @@ Optional capabilities are never granted automatically. A missing required capabi
 
 ## Native DSH UI
 
-The package adds RoleHub actions to the official `conversation.session.header.actions` and `sidebar.footer.action` slots. Both open the same native `Modal`, where you can search Hubs, tags, descriptions, and capabilities; inspect the bundle digest and effective capability groups; then create a role Session. If Room is installed, its typed member-provider slot can open this same chooser with the current Room preselected.
+The package adds RoleHub actions to the official `conversation.session.header.actions` and `sidebar.footer.action` slots. Both open the same native `Modal`, where you can search Hubs, tags, descriptions, and capabilities; inspect the bundle digest and effective capability groups; then create a role Session. With Room v0.6 or newer installed, the bridge registers the same verified picker in Room's distinct header and footer provider seats, with the current Room preselected. The original header-seat key remains registered so existing provider integrations keep working.
 
 <p align="center">
   <img src="assets/rolehub-native-ui-concept.svg" width="920" alt="Concept preview of the RoleHub chooser in native DSH Web">
@@ -85,16 +85,16 @@ There is no standalone RoleHub dashboard. The conversation, sidebar, composer, a
 Requirements: Node.js `^22.19.0 || >=24` and DeepSeek Harness `0.1.0-rc.6`.
 
 ```sh
-dsh plugin --profile web add github:ishuowang/dsh-rolehub-bridge#v0.1.0
+dsh plugin --profile web add github:ishuowang/dsh-rolehub-bridge#v0.2.0
 dsh web
 ```
 
-The pinned GitHub install is the supported path for v0.1. The bundle adds the Host runtime, `/rolehub` command, read-only native API, and Web client to the same profile. The package is not yet published to npm.
+The pinned GitHub install is the supported path for v0.2. The bundle adds the Host runtime, `/rolehub` command, read-only native API, and Web client to the same profile. The package is not yet published to npm.
 
 To attach created role Sessions to a Room, install Room in the same profile:
 
 ```sh
-dsh plugin --profile web add github:ishuowang/dsh-agent-team-room#v0.5.0
+dsh plugin --profile web add github:ishuowang/dsh-agent-team-room#v0.6.0
 ```
 
 Without Room, everything except attachment still works: the role starts as an ordinary independent child Session.
@@ -183,7 +183,7 @@ All Hub endpoints must be credential-free HTTPS. Publisher trust is scoped to on
 
 A catalog label is discovery metadata, not a cryptographic signature. Before activation, the bridge checks the complete catalog identity against the loaded manifest, records the downloaded archive hash, and verifies the manifest, bundle lock, and final RoleHub bundle digest. Reference publishers must be explicitly trusted by that exact Hub configuration; community roles require `allowCommunityRoles: true`.
 
-A role can request capabilities but cannot grant them. v0.1 grants required requests only when every item is both in `allowedCapabilities` and implemented by the bridge's fixed DSH binding. Denied capabilities remain denied, optional requests remain ungranted, and unsupported required access aborts creation. The resulting policy receipt is digest-bound to the role bundle and rechecked before every activation.
+A role can request capabilities but cannot grant them. v0.2 grants required requests only when every item is both in `allowedCapabilities` and implemented by the bridge's fixed DSH binding. Denied capabilities remain denied, optional requests remain ungranted, and unsupported required access aborts creation. The resulting policy receipt is digest-bound to the role bundle and rechecked before every activation.
 
 These controls are DSH tool-policy boundaries inside a shared Host process. They are not an OS sandbox, container, egress firewall, secret broker, or interactive approval system. Install the bridge and its compatibility packages as trusted Host code.
 
@@ -199,7 +199,7 @@ Room is role-neutral. It does not discover RoleHub, load prompts or skills, or i
 
 If final attachment or receipt persistence fails after Session creation, the bridge attempts to remove the Room member, interrupts the child, and records an orphaned binding for diagnosis. It never pretends the whole operation was atomic.
 
-## v0.1 limits
+## v0.2 limits
 
 - DeepSeek Harness support is a developer-preview integration pinned to `0.1.0-rc.6`; revalidate before upgrading DSH.
 - Digest verification provides integrity, not publisher identity. Signatures, transparency logs, revocation, and interactive trust prompts are not implemented.

@@ -1,6 +1,6 @@
 {
   "name": "dsh-rolehub-bridge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Native RoleHub discovery, verified role Sessions, and Agent Team Room integration for DeepSeek Harness.",
   "type": "module",
   "main": "lib/index.js",
