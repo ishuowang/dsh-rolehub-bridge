@@ -6,6 +6,7 @@ type RoleView = NativeRoleView;
 export declare const ROLEHUB_HEADER_ENTRY_ID = "dsh-rolehub-bridge-header";
 export declare const ROLEHUB_FOOTER_ENTRY_ID = "dsh-rolehub-bridge-footer";
 export declare const ROLEHUB_ROOM_INVITE_ENTRY_ID = "dsh-rolehub-bridge-room-invite";
+export declare const ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID = "dsh-rolehub-bridge-room-invite-footer";
 export declare const ROLEHUB_NATIVE_API_PREFIX = "/rolehub-bridge/api/session/";
 export type RoleHubHeaderActionProps = PropsRuntime<'conversation.session.header.actions'>;
 export type RoleHubFooterActionProps = PropsRuntime<'sidebar.footer.action'> & SidebarFooterActionOwnerProps;
@@ -23,9 +24,15 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
             scope: 'session';
             owner: RoleHubRoomInviteOwnerProps;
         };
+        'agent-team-room.invite.provider.footer': {
+            kind: 'list';
+            scope: 'session';
+            owner: RoleHubRoomInviteOwnerProps;
+        };
     }
 }
 export type RoleHubRoomInviteProps = PropsRuntime<'agent-team-room.invite.provider'>;
+export type RoleHubRoomFooterInviteProps = PropsRuntime<'agent-team-room.invite.provider.footer'>;
 export interface StartRoleCommandOptions {
     label?: string;
     roomId?: string;

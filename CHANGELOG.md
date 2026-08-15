@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-15
+
+### Changed
+
+- Register the same RoleHub Room picker in Agent Team Room v0.6's distinct header and footer provider seats.
+- Retain the original `agent-team-room.invite.provider` registration so existing header-seat integrations keep their stable key.
+
 ## [0.1.0] - 2026-08-15
 
 ### Added
@@ -32,5 +39,6 @@ All notable changes to this project are documented here. The format follows [Kee
 - Enforcement is shared-process DSH tool policy, not an OS sandbox.
 - Room attachment uses best-effort compensation rather than a cross-plugin transaction.
 
-[Unreleased]: https://github.com/ishuowang/dsh-rolehub-bridge/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ishuowang/dsh-rolehub-bridge/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/ishuowang/dsh-rolehub-bridge/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/ishuowang/dsh-rolehub-bridge/releases/tag/v0.1.0

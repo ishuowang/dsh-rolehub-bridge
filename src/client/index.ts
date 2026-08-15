@@ -32,6 +32,7 @@ type RoleView = NativeRoleView
 export const ROLEHUB_HEADER_ENTRY_ID = 'dsh-rolehub-bridge-header'
 export const ROLEHUB_FOOTER_ENTRY_ID = 'dsh-rolehub-bridge-footer'
 export const ROLEHUB_ROOM_INVITE_ENTRY_ID = 'dsh-rolehub-bridge-room-invite'
+export const ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID = 'dsh-rolehub-bridge-room-invite-footer'
 export const ROLEHUB_NATIVE_API_PREFIX = '/rolehub-bridge/api/session/'
 
 export type RoleHubHeaderActionProps = PropsRuntime<'conversation.session.header.actions'>
@@ -52,10 +53,16 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
       scope: 'session'
       owner: RoleHubRoomInviteOwnerProps
     }
+    'agent-team-room.invite.provider.footer': {
+      kind: 'list'
+      scope: 'session'
+      owner: RoleHubRoomInviteOwnerProps
+    }
   }
 }
 
 export type RoleHubRoomInviteProps = PropsRuntime<'agent-team-room.invite.provider'>
+export type RoleHubRoomFooterInviteProps = PropsRuntime<'agent-team-room.invite.provider.footer'>
 
 interface LauncherProps {
   sessionId: SessionId | undefined
@@ -689,6 +696,23 @@ function RoleHubLauncher({ sessionId, sessions, wide, location, roomContext }: L
 /** Required DSH services: official additive slots and the native Session runtime. */
 export const inject = ['slots', 'sessions']
 
+function renderRoomInvite(
+  props: RoleHubRoomInviteOwnerProps,
+  sessions: ISessions,
+): ReactElement {
+  return createElement(RoleHubLauncher, {
+    sessionId: props.sessionId as SessionId,
+    sessions,
+    location: 'room',
+    roomContext: {
+      roomId: props.roomId,
+      roomName: props.roomName,
+      disabled: props.disabled,
+      onAttached: props.onAttached,
+    },
+  })
+}
+
 /** Add RoleHub controls without replacing a DSH root, sidebar, conversation, or details surface. */
 export function apply(ctx: ClientContext): void {
   const sessions = ctx.get('sessions') as unknown as ISessions
@@ -721,15 +745,11 @@ export function apply(ctx: ClientContext): void {
     name: 'agent-team-room.invite.provider',
     id: ROLEHUB_ROOM_INVITE_ENTRY_ID,
     order: 10,
-  }, (props: RoleHubRoomInviteProps) => createElement(RoleHubLauncher, {
-    sessionId: props.sessionId as SessionId,
-    sessions,
-    location: 'room',
-    roomContext: {
-      roomId: props.roomId,
-      roomName: props.roomName,
-      disabled: props.disabled,
-      onAttached: props.onAttached,
-    },
-  })))
+  }, (props: RoleHubRoomInviteProps) => renderRoomInvite(props, sessions)))
+
+  ctx.slots.inject('agent-team-room.invite.provider.footer', () => ctx.slots.register({
+    name: 'agent-team-room.invite.provider.footer',
+    id: ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
+    order: 10,
+  }, (props: RoleHubRoomFooterInviteProps) => renderRoomInvite(props, sessions)))
 }

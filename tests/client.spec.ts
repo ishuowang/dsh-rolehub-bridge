@@ -53,6 +53,7 @@ import {
   ROLEHUB_FOOTER_ENTRY_ID,
   ROLEHUB_HEADER_ENTRY_ID,
   ROLEHUB_NATIVE_API_PREFIX,
+  ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
   ROLEHUB_ROOM_INVITE_ENTRY_ID,
   apply,
   availableTags,
@@ -215,7 +216,7 @@ describe('native DSH Web entries', () => {
     expect(inject).toEqual(['slots', 'sessions'])
   })
 
-  it('registers additive header, footer, and Room invitation entries only', () => {
+  it('registers additive header, footer, and both Room invitation entries only', () => {
     const { context, entries, injectSlot, register } = clientHarness()
 
     apply(context as never)
@@ -224,19 +225,25 @@ describe('native DSH Web entries', () => {
       'conversation.session.header.actions',
       'sidebar.footer.action',
       'agent-team-room.invite.provider',
+      'agent-team-room.invite.provider.footer',
     ])
-    expect(register).toHaveBeenCalledTimes(3)
+    expect(register).toHaveBeenCalledTimes(4)
     expect(entries.map(entry => entry.registration)).toEqual([
       { name: 'conversation.session.header.actions', id: ROLEHUB_HEADER_ENTRY_ID, order: 30 },
       { name: 'sidebar.footer.action', id: ROLEHUB_FOOTER_ENTRY_ID, order: 30 },
       { name: 'agent-team-room.invite.provider', id: ROLEHUB_ROOM_INVITE_ENTRY_ID, order: 10 },
+      {
+        name: 'agent-team-room.invite.provider.footer',
+        id: ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
+        order: 10,
+      },
     ])
     expect(entries.map(entry => entry.registration.name)).not.toContain('root')
     expect(entries.map(entry => entry.registration.name)).not.toContain('sidebar')
     expect(entries.map(entry => entry.registration.name)).not.toContain('conversation')
   })
 
-  it('renders the browser in a native Modal from all three additive entries', () => {
+  it('renders the browser in a native Modal from every additive entry', () => {
     const { context, entries } = clientHarness()
     apply(context as never)
 
@@ -244,6 +251,7 @@ describe('native DSH Web entries', () => {
       [ROLEHUB_HEADER_ENTRY_ID, 'header'],
       [ROLEHUB_FOOTER_ENTRY_ID, 'footer'],
       [ROLEHUB_ROOM_INVITE_ENTRY_ID, 'room'],
+      [ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID, 'room'],
     ] as const
     for (const [id, location] of cases) {
       const entry = entries.find(candidate => candidate.registration.id === id)
@@ -257,18 +265,20 @@ describe('native DSH Web entries', () => {
     }
   })
 
-  it('renders a lightweight Room-owned invitation action', () => {
+  it('renders the same lightweight Room-owned invitation action in both Room hosts', () => {
     const { context, entries } = clientHarness()
     apply(context as never)
-    const entry = entries.find(candidate => candidate.registration.id === ROLEHUB_ROOM_INVITE_ENTRY_ID)
-    if (!entry) throw new Error('missing Room invitation entry')
+    for (const id of [ROLEHUB_ROOM_INVITE_ENTRY_ID, ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID]) {
+      const entry = entries.find(candidate => candidate.registration.id === id)
+      if (!entry) throw new Error(`missing Room invitation entry ${id}`)
 
-    const rendered = renderLauncher(entry, 'room')
-    expect(findElement(rendered, 'Button')?.props).toMatchObject({
-      children: 'Choose RoleHub role',
-      disabled: false,
-      'aria-label': 'Choose a RoleHub role for Review Room',
-    })
+      const rendered = renderLauncher(entry, 'room')
+      expect(findElement(rendered, 'Button')?.props).toMatchObject({
+        children: 'Choose RoleHub role',
+        disabled: false,
+        'aria-label': 'Choose a RoleHub role for Review Room',
+      })
+    }
   })
 
   it('ships a ModuleLoader bundle using official primitives and no replacement UI', async () => {
@@ -331,6 +341,7 @@ describe('native DSH Web entries', () => {
     expect(client).toMatchObject({ inject: ['slots', 'sessions'], apply: expect.any(Function) })
     expect(source).toContain('.Modal')
     expect(source).toContain('agent-team-room.invite.provider')
+    expect(source).toContain('agent-team-room.invite.provider.footer')
   })
 
   it('contains no DOM patch, global stylesheet, standalone dashboard, or social automation', () => {

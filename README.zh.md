@@ -62,7 +62,7 @@ flowchart LR
 
 ## DSH 原生 UI
 
-插件通过官方 `conversation.session.header.actions` 与 `sidebar.footer.action` typed slot 增加 RoleHub 入口。两个入口打开同一个原生 `Modal`：可按 Hub、标签、描述和能力搜索，查看 bundle 摘要与能力分组，再创建角色 Session。如果同时安装 Room，它的 typed member-provider slot 也能打开同一个选择器，并预选当前 Room。
+插件通过官方 `conversation.session.header.actions` 与 `sidebar.footer.action` typed slot 增加 RoleHub 入口。两个入口打开同一个原生 `Modal`：可按 Hub、标签、描述和能力搜索，查看 bundle 摘要与能力分组，再创建角色 Session。安装 Room v0.6 或更新版本后，Bridge 会把同一个已验证选择器分别注册到 Room 的 header/footer provider seat，并预选当前 Room；原 header seat key 仍会注册，让既有 provider 集成继续使用稳定接口。
 
 <p align="center">
   <img src="assets/rolehub-native-ui-concept.svg" width="920" alt="DSH Web 原生 RoleHub 选择器概念预览">
@@ -85,16 +85,16 @@ flowchart LR
 要求 Node.js `^22.19.0 || >=24` 与 DeepSeek Harness `0.1.0-rc.6`。
 
 ```sh
-dsh plugin --profile web add github:ishuowang/dsh-rolehub-bridge#v0.1.0
+dsh plugin --profile web add github:ishuowang/dsh-rolehub-bridge#v0.2.0
 dsh web
 ```
 
-v0.1 推荐使用锁定版本的 GitHub 安装。bundle 会把 Host runtime、`/rolehub` 命令、只读原生 API 和 Web client 一并加入同一 profile；当前尚未发布 npm 包。
+v0.2 推荐使用锁定版本的 GitHub 安装。bundle 会把 Host runtime、`/rolehub` 命令、只读原生 API 和 Web client 一并加入同一 profile；当前尚未发布 npm 包。
 
 如需把创建出的角色 Session 接入 Room，请在同一 profile 安装 Room：
 
 ```sh
-dsh plugin --profile web add github:ishuowang/dsh-agent-team-room#v0.5.0
+dsh plugin --profile web add github:ishuowang/dsh-agent-team-room#v0.6.0
 ```
 
 没有 Room 时，除接入 Room 外的功能都可正常使用：角色会作为普通的独立子 Session 启动。
@@ -183,7 +183,7 @@ dsh plugin --profile web add github:ishuowang/dsh-agent-team-room#v0.5.0
 
 Catalog 中的标签只是发现元数据，不是密码学签名。激活前，Bridge 会把完整 catalog 身份与已加载 manifest 对齐，记录下载 archive 哈希，并校验 manifest、bundle lock 与最终 RoleHub bundle 摘要。Reference publisher 必须在对应 Hub 配置中明确受信；community 角色需要设置 `allowCommunityRoles: true`。
 
-角色可以请求能力，但不能授予自己能力。v0.1 只会授予同时存在于 `allowedCapabilities` 且由 Bridge 固定 DSH binding 实现的 required 请求。Denied 保持拒绝，optional 保持未授权；任何 required 能力不支持都会中止创建。生成的 policy receipt 与角色 bundle 摘要绑定，并会在每次 activation 前重新验证。
+角色可以请求能力，但不能授予自己能力。v0.2 只会授予同时存在于 `allowedCapabilities` 且由 Bridge 固定 DSH binding 实现的 required 请求。Denied 保持拒绝，optional 保持未授权；任何 required 能力不支持都会中止创建。生成的 policy receipt 与角色 bundle 摘要绑定，并会在每次 activation 前重新验证。
 
 这些控制是共享 Host 进程内的 DSH tool-policy 边界，不等于 OS sandbox、容器、出口防火墙、secret broker 或交互式审批系统。Bridge 和兼容包都是可信 Host 代码，安装前应审查。
 
@@ -199,7 +199,7 @@ Room 保持角色中立：不发现 RoleHub、不加载 prompt 或 skill，也�
 
 如果 Session 创建后，Room 接入或 receipt 持久化失败，Bridge 会尝试移除 Room 成员、中断子 Session，并记录 orphaned binding 便于诊断；不会假装跨插件操作具备完整事务性。
 
-## v0.1 限制
+## v0.2 限制
 
 - DeepSeek Harness 集成仍是 developer preview，并固定到 `0.1.0-rc.6`；升级 DSH 前必须重新验证。
 - 摘要校验只能证明完整性，不能证明发布者身份；尚未实现签名、透明日志、撤销与交互式信任确认。
