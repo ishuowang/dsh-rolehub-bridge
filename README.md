@@ -62,7 +62,7 @@ Optional capabilities are never granted automatically. A missing required capabi
 
 ## Native DSH UI
 
-The package adds RoleHub actions to the official `conversation.session.header.actions` and `sidebar.footer.action` slots. Both open the same native `Modal`, where you can search Hubs, tags, descriptions, and capabilities; inspect the bundle digest and effective capability groups; then create a role Session. With Room v0.6 or newer installed, the bridge registers the same verified picker in Room's distinct header and footer provider seats, with the current Room preselected. The original header-seat key remains registered so existing provider integrations keep working.
+The package adds RoleHub actions to the official `conversation.session.header.actions` and `sidebar.footer.action` slots. Both open the same native `Modal`, where you can search Hubs, tags, descriptions, and capabilities; inspect the bundle digest and effective capability groups; then create a role Session. With a Room release that offers the native `Room` conversation view installed, the bridge registers the same verified picker in Room's distinct header, footer, and view provider seats, with the current Room preselected. The original header-seat key remains registered so existing provider integrations keep working.
 
 <p align="center">
   <img src="assets/rolehub-native-ui-concept.svg" width="920" alt="Concept preview of the RoleHub chooser in native DSH Web">

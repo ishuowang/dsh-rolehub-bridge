@@ -62,7 +62,7 @@ flowchart LR
 
 ## DSH 原生 UI
 
-插件通过官方 `conversation.session.header.actions` 与 `sidebar.footer.action` typed slot 增加 RoleHub 入口。两个入口打开同一个原生 `Modal`：可按 Hub、标签、描述和能力搜索，查看 bundle 摘要与能力分组，再创建角色 Session。安装 Room v0.6 或更新版本后，Bridge 会把同一个已验证选择器分别注册到 Room 的 header/footer provider seat，并预选当前 Room；原 header seat key 仍会注册，让既有 provider 集成继续使用稳定接口。
+插件通过官方 `conversation.session.header.actions` 与 `sidebar.footer.action` typed slot 增加 RoleHub 入口。两个入口打开同一个原生 `Modal`：可按 Hub、标签、描述和能力搜索，查看 bundle 摘要与能力分组，再创建角色 Session。安装提供原生 `Room` 会话视图的 Room 版本后，Bridge 会把同一个已验证选择器分别注册到 Room 的 header、footer 与 view provider seat，并预选当前 Room；原 header seat key 仍会注册，让既有 provider 集成继续使用稳定接口。
 
 <p align="center">
   <img src="assets/rolehub-native-ui-concept.svg" width="920" alt="DSH Web 原生 RoleHub 选择器概念预览">
