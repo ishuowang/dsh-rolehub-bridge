@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+
+- Register the verified RoleHub picker in Agent Team Room's native conversation-view provider seat while retaining the existing header and footer integrations.
+
 ## [0.2.0] - 2026-08-15
 
 ### Changed

@@ -55,6 +55,7 @@ import {
   ROLEHUB_NATIVE_API_PREFIX,
   ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
   ROLEHUB_ROOM_INVITE_ENTRY_ID,
+  ROLEHUB_ROOM_VIEW_INVITE_ENTRY_ID,
   apply,
   availableTags,
   buildStartRoleCommand,
@@ -216,7 +217,7 @@ describe('native DSH Web entries', () => {
     expect(inject).toEqual(['slots', 'sessions'])
   })
 
-  it('registers additive header, footer, and both Room invitation entries only', () => {
+  it('registers additive header, footer, and all Room invitation entries only', () => {
     const { context, entries, injectSlot, register } = clientHarness()
 
     apply(context as never)
@@ -226,8 +227,9 @@ describe('native DSH Web entries', () => {
       'sidebar.footer.action',
       'agent-team-room.invite.provider',
       'agent-team-room.invite.provider.footer',
+      'agent-team-room.invite.provider.view',
     ])
-    expect(register).toHaveBeenCalledTimes(4)
+    expect(register).toHaveBeenCalledTimes(5)
     expect(entries.map(entry => entry.registration)).toEqual([
       { name: 'conversation.session.header.actions', id: ROLEHUB_HEADER_ENTRY_ID, order: 30 },
       { name: 'sidebar.footer.action', id: ROLEHUB_FOOTER_ENTRY_ID, order: 30 },
@@ -235,6 +237,11 @@ describe('native DSH Web entries', () => {
       {
         name: 'agent-team-room.invite.provider.footer',
         id: ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
+        order: 10,
+      },
+      {
+        name: 'agent-team-room.invite.provider.view',
+        id: ROLEHUB_ROOM_VIEW_INVITE_ENTRY_ID,
         order: 10,
       },
     ])
@@ -252,6 +259,7 @@ describe('native DSH Web entries', () => {
       [ROLEHUB_FOOTER_ENTRY_ID, 'footer'],
       [ROLEHUB_ROOM_INVITE_ENTRY_ID, 'room'],
       [ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID, 'room'],
+      [ROLEHUB_ROOM_VIEW_INVITE_ENTRY_ID, 'room'],
     ] as const
     for (const [id, location] of cases) {
       const entry = entries.find(candidate => candidate.registration.id === id)
@@ -265,10 +273,14 @@ describe('native DSH Web entries', () => {
     }
   })
 
-  it('renders the same lightweight Room-owned invitation action in both Room hosts', () => {
+  it('renders the same lightweight Room-owned invitation action in every Room host', () => {
     const { context, entries } = clientHarness()
     apply(context as never)
-    for (const id of [ROLEHUB_ROOM_INVITE_ENTRY_ID, ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID]) {
+    for (const id of [
+      ROLEHUB_ROOM_INVITE_ENTRY_ID,
+      ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
+      ROLEHUB_ROOM_VIEW_INVITE_ENTRY_ID,
+    ]) {
       const entry = entries.find(candidate => candidate.registration.id === id)
       if (!entry) throw new Error(`missing Room invitation entry ${id}`)
 
@@ -342,6 +354,7 @@ describe('native DSH Web entries', () => {
     expect(source).toContain('.Modal')
     expect(source).toContain('agent-team-room.invite.provider')
     expect(source).toContain('agent-team-room.invite.provider.footer')
+    expect(source).toContain('agent-team-room.invite.provider.view')
   })
 
   it('contains no DOM patch, global stylesheet, standalone dashboard, or social automation', () => {
