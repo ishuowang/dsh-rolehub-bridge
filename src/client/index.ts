@@ -33,6 +33,7 @@ export const ROLEHUB_HEADER_ENTRY_ID = 'dsh-rolehub-bridge-header'
 export const ROLEHUB_FOOTER_ENTRY_ID = 'dsh-rolehub-bridge-footer'
 export const ROLEHUB_ROOM_INVITE_ENTRY_ID = 'dsh-rolehub-bridge-room-invite'
 export const ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID = 'dsh-rolehub-bridge-room-invite-footer'
+export const ROLEHUB_ROOM_VIEW_INVITE_ENTRY_ID = 'dsh-rolehub-bridge-room-invite-view'
 export const ROLEHUB_NATIVE_API_PREFIX = '/rolehub-bridge/api/session/'
 
 export type RoleHubHeaderActionProps = PropsRuntime<'conversation.session.header.actions'>
@@ -58,11 +59,17 @@ declare module '@deepseek-ai/dsh-client-ui-slots' {
       scope: 'session'
       owner: RoleHubRoomInviteOwnerProps
     }
+    'agent-team-room.invite.provider.view': {
+      kind: 'list'
+      scope: 'session'
+      owner: RoleHubRoomInviteOwnerProps
+    }
   }
 }
 
 export type RoleHubRoomInviteProps = PropsRuntime<'agent-team-room.invite.provider'>
 export type RoleHubRoomFooterInviteProps = PropsRuntime<'agent-team-room.invite.provider.footer'>
+export type RoleHubRoomViewInviteProps = PropsRuntime<'agent-team-room.invite.provider.view'>
 
 interface LauncherProps {
   sessionId: SessionId | undefined
@@ -752,4 +759,10 @@ export function apply(ctx: ClientContext): void {
     id: ROLEHUB_ROOM_FOOTER_INVITE_ENTRY_ID,
     order: 10,
   }, (props: RoleHubRoomFooterInviteProps) => renderRoomInvite(props, sessions)))
+
+  ctx.slots.inject('agent-team-room.invite.provider.view', () => ctx.slots.register({
+    name: 'agent-team-room.invite.provider.view',
+    id: ROLEHUB_ROOM_VIEW_INVITE_ENTRY_ID,
+    order: 10,
+  }, (props: RoleHubRoomViewInviteProps) => renderRoomInvite(props, sessions)))
 }
